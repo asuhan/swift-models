@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #if canImport(x10_device)
+import x10_tensor
 import x10_device
 #else
 import TensorFlow

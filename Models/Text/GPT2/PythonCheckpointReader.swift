@@ -14,6 +14,7 @@
 
 import ModelSupport
 #if canImport(x10_tensor)
+import x10_device
 import x10_tensor
 #else
 import TensorFlow
