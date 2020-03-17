@@ -14,7 +14,12 @@
 
 // Adapted from: https://github.com/eaplatanios/nca/blob/master/Sources/NCA/Utilities/Protocols.swift
 
+#if canImport(x10_tensor)
+import x10_tensor
+#else
 import TensorFlow
+#endif
+
 public protocol Batchable {
   static func batch(_ values: [Self]) -> Self
 }

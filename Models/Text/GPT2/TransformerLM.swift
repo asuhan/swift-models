@@ -12,7 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if canImport(x10_tensor)
+import x10_tensor
+#else
 import TensorFlow
+#endif
 
 struct TimeDistributed: Layer {
     var dense: Dense<Float>

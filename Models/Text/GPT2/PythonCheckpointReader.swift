@@ -13,7 +13,11 @@
 // limitations under the License.
 
 import ModelSupport
+#if canImport(x10_tensor)
+import x10_tensor
+#else
 import TensorFlow
+#endif
 
 public struct TransformerLMConfig: Codable {
     public let vocabSize: Int

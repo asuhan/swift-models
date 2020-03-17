@@ -15,7 +15,6 @@
 import Batcher
 import Foundation
 import ModelSupport
-import TensorFlow
 
 public enum TextUnsupervisedVariant: String {
     /// - Source: [Einstein AI WikiText-103](

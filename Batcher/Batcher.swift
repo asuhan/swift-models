@@ -12,7 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if canImport(x10_device)
+import x10_device
+#else
 import TensorFlow
+#endif
 
 // Return the input with no operation done
 public func identity<C>(_ x: C) -> C { return x }

@@ -20,7 +20,11 @@
 // shards to obtain their raw bytes.
 
 import Foundation
+#if canImport(x10_tensor)
+import x10_tensor
+#else
 import TensorFlow
+#endif
 
 /// A Swift-native TensorFlow v2 checkpoint reader that can download all checkpoint files from 
 /// remote locations and store them in a local temporary directory. This reader has no dependencies
