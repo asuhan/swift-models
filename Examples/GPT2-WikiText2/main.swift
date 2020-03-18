@@ -14,7 +14,12 @@
 
 import Batcher
 import Datasets
+#if canImport(x10_tensor)
+import x10_tensor
+import x10_device
+#else
 import TensorFlow
+#endif
 import TextModels
 
 var gpt = try GPT2()
