@@ -17,6 +17,7 @@ import Datasets
 #if canImport(x10_tensor)
 import x10_tensor
 import x10_device
+import x10_xla_tensor_wrapper
 #else
 import TensorFlow
 #endif
@@ -25,8 +26,8 @@ import TextModels
 var gpt = try GPT2()
 
 let sequenceLength = gpt.contextSize
-let trainingBatchSize = 8
-let validationBatchSize = 4
+let trainingBatchSize = 1
+let validationBatchSize = 1
 let numWorkers = 8
 // Use default WikiText2 dataset.
 let dataset = TextUnsupervised(bpe: gpt.bpe, variant: .wikiText2,
@@ -42,6 +43,7 @@ print("Dataset acquired.")
 var optimizer = Adam(for: gpt.model, learningRate: 0.001)
 
 print("Starting training...")
+LazyTensorBarrier(wait: true)
 
 for epoch in 1...10 {
     Context.local.learningPhase = .training
@@ -60,6 +62,8 @@ for epoch in 1...10 {
         trainingLossSum += loss.scalarized()
         trainingBatchCount += 1
         optimizer.update(&gpt.model, along: gradients)
+        LazyTensorBarrier(wait: true)
+        PrintMetrics()
     }
 
     Context.local.learningPhase = .inference
